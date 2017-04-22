@@ -1,4 +1,7 @@
-﻿using System.Web.Mvc;
+﻿using Store.Data;
+using Store.Models.Products;
+using System.Linq;
+using System.Web.Mvc;
 
 namespace Store.Controllers
 {
@@ -6,7 +9,21 @@ namespace Store.Controllers
     {
         public ActionResult Index()
         {
-            return View();
+            var db = new StoreDbContext();
+
+            var products = db.Products.OrderByDescending(p => p.Id)
+                .Take(3)
+                .Select(p => new HomeProducts
+                {
+                    Id = p.Id,
+                    Name = p.Name,
+                    Categorie = p.Categorie,
+                    ImageUrl = p.ImageUrl
+
+                })
+                .ToList();
+            
+            return View(products);
         }
 
     }

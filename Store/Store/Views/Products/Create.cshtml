@@ -1,0 +1,16 @@
+﻿@model Store.Models.Products.CreateProductModel
+
+@{
+    ViewBag.Title = "Add Product";
+
+}
+
+@using (Html.BeginForm("Create", "Products", FormMethod.Post))
+{ 
+
+@Html.EditorForModel()
+
+    <div>
+        <input type="submit"value="Save Product"/>
+    </div>
+}

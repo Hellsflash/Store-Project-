@@ -1,0 +1,16 @@
+﻿@model Store.Models.Products.ProductDetails
+
+<div class="row mt-60">
+    <div class="col-md-4">
+      <img src="@Model.ImageUrl"class="img-responsive"/>
+    </div>
+    <div class="col-md-4">
+
+        <h2>@Model.Name</h2>
+        <h2>@Model.Categorie</h2>
+        <h3>@Model.Price BGN</h3>
+    </div>
+    <div class="col-md-4">
+        <h3>@Model.Description</h3>
+    </div>
+</div>

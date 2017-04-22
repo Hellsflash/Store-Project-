@@ -1,5 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
-
+using Store.Helpers;
 namespace Store.Models.Products
 {
     public class CreateProductModel
@@ -18,6 +18,8 @@ namespace Store.Models.Products
         public decimal Price { get; set; }
 
         [Required]
+        [Display(Name="Picture URL")]
+        [ImageValidateion]
         public string ImageUrl { get; set; }   
     }
 }
