@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNet.Identity;
 using Store.Data;
 using Store.Models.Products;
+using System.Linq;
 using System.Web.Mvc;
 
 namespace Store.Controllers
@@ -18,7 +19,7 @@ namespace Store.Controllers
 
         [Authorize]
         [HttpPost]
-        public ActionResult Create(CreateProductModel model)
+        public ActionResult Create(CreateProductModel productModel)
         {
             if (this.ModelState.IsValid)
             {
@@ -26,11 +27,11 @@ namespace Store.Controllers
 
                 var product = new Product
                 {
-                    Name = model.Name,
-                    Categorie = model.Categorie,
-                    Description = model.Description,
-                    Price = model.Price,
-                    ImageUrl = model.ImageUrl,
+                    Name = productModel.Name,
+                    Categorie = productModel.Categorie,
+                    Description = productModel.Description,
+                    Price = productModel.Price,
+                    ImageUrl = productModel.ImageUrl,
                     AuthorId = authorId,
                 };
 
@@ -42,7 +43,31 @@ namespace Store.Controllers
                 return RedirectToAction("Details", new { id = product.Id });
             }
 
-            return View(model);
+            return View(productModel);
+        }
+
+        public ActionResult Details(int id)
+        {
+            var db = new StoreDbContext();
+
+            var product = db.Products
+                .Where(p => p.Id == id)
+                .Select(p => new ProductDetails
+                {
+                    Name =p.Name,
+                    Categorie =p.Categorie,
+                    Price =p.Price,
+                    Description =p.Description,
+                    ImageUrl =p.ImageUrl
+                    
+                })
+                .FirstOrDefault();
+            if (product== null)
+            {
+                return HttpNotFound();
+            }
+            return View(product);
+
         }
       }
 }
