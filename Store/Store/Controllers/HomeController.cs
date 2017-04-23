@@ -18,7 +18,8 @@ namespace Store.Controllers
                     Id = p.Id,
                     Name = p.Name,
                     Categorie = p.Categorie,
-                    ImageUrl = p.ImageUrl
+                    ImageUrl = p.ImageUrl,
+                    
 
                 })
                 .ToList();

@@ -9,6 +9,31 @@ namespace Store.Controllers
     public class ProductsController : Controller
         {
 
+        public ActionResult All(int page= 1)
+        {
+            var db = new StoreDbContext();
+            var pageSize = 5;
+
+            var products = db.Products
+                .OrderByDescending(p=>p.Id)
+                .Skip((page-1)*pageSize)
+                .Take(pageSize)
+                .Select(p => new HomeProducts
+            {
+                 Id = p.Id,
+                 Categorie = p.Categorie,
+                 Name = p.Name,
+                 ImageUrl=p.ImageUrl,
+                 Price=p.Price
+            
+            })           
+            .ToList();
+
+            ViewBag.CurrPage = page;
+
+
+            return View(products);
+        }
 
         [Authorize]
         [HttpGet]
