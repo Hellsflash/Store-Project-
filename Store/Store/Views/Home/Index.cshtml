@@ -1,27 +1,42 @@
 ﻿@model IEnumerable<Store.Models.Products.HomeProducts>
 
+
 @{
     ViewBag.Title = "Home Page";
 }
+
+
 
 <div class="jumbotron">
     <h1 class="text-center">Online Store</h1>
     <p class="lead text-center">Buy and Sell Everything!</p>
     <p class="text-center">
-        <a href="/Products/Create"class="btn btn-primary btn-lg">Sell Now</a>
-    <a href="/Products/All" class="btn btn-primary btn-lg">See All Products</a>
+        <a href="/Products/Create" class="btn btn-primary btn-lg">Sell Now</a>
+        <a href="/Products/All" class="btn btn-primary btn-lg">See All Products</a>
+        <br />
+        <br />
+        <div class="text-center">
+            @using (Html.BeginForm("All","Products",FormMethod.Get))
+            {
+                <input type="text" class="form-control" name="search" style="display:inline-block" />
+                <input type="submit" value="Search" class="btn btn-default" />
+            }
+            </div>
     </p>
+
+
 </div>
 
 <div class="row">
-   @foreach (var product in Model)
-   {
-     <div class="col-md-4">
-          <h2>@product.Name - @product.Categorie</h2>
-        <p>
-         <a class="btn btn-default" href="/Products/Details/@product.Id">
-             <img src="@product.ImageUrl" class="img-responsive" />
-            </a></p>
-     </div>
-   }
+    @foreach (var product in Model)
+    {
+        <div class="col-md-4">
+            <h2>@product.Name - @product.Categorie</h2>
+            <p>
+                <a class="btn btn-default" href="/Products/Details/@product.Id">
+                    <img src="@product.ImageUrl" class="img-responsive" />
+                </a>
+            </p>
+        </div>
+    }
 </div>

@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System;
+using System.ComponentModel.DataAnnotations;
 
 namespace Store.Data
 {
@@ -26,5 +27,7 @@ namespace Store.Data
 
 
         public virtual User Author { get; set; }
-   }
+
+
+    }
 }

@@ -5,12 +5,46 @@
 
 }
 
-@using (Html.BeginForm("Create", "Products", FormMethod.Post))
-{ 
+@using (Html.BeginForm("Create", "Products", FormMethod.Post, new { @class = "form-horizontal" }))
+{
+    <div class="container">
+        <div class=" well">
+            <div class="form-group">
+                @Html.LabelFor(n => n.Name, new { @class = "control-lable col-sm-4" })
+                <div class="col-sm-4">
+                    @Html.TextBoxFor(n => n.Name, new { @class = "form-control" })
+                </div>
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(n => n.Categorie, new { @class = "control-lable col-sm-4" })
+                <div class="col-sm-4">
+                    @Html.TextBoxFor(n => n.Categorie, new { @class = "form-control" })
+                </div>
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(n => n.Price, new { @class = "control-lable col-sm-4" })
+                <div class="col-sm-4">
+                    @Html.TextBoxFor(n => n.Price, new { @class = "form-control" })
+                </div>
+            </div>
 
-@Html.EditorForModel()
+            <div class="form-group">
+                @Html.LabelFor(n => n.ImageUrl, new { @class = "control-lable col-sm-4" })
+                <div class="col-sm-4">
+                    @Html.TextBoxFor(n => n.ImageUrl, new { @class = "form-control", @rows = "7" })
+                </div>
+            </div>
 
-    <div>
-        <input type="submit"value="Save Product"/>
+            <div class="form-group">
+                @Html.LabelFor(m => m.Description, new { @class = "control-label col-sm-4" })
+                <div class="col-sm-4">
+                    @Html.TextAreaFor(m => m.Description, new { @class = "form-control", @rows = "7" })
+                </div>
+            </div>
+
+            <div>
+                <input type="submit"class="btn btn-success" value="Save Product" />
+            </div>
+        </div>
     </div>
 }

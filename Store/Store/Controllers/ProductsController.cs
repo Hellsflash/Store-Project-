@@ -9,19 +9,41 @@ namespace Store.Controllers
     public class ProductsController : Controller
         {
 
-        public ActionResult All(int page= 1)
+       
+
+
+        public ActionResult All(int page= 1,
+            string user = null,string search= null)
         {
+           
+
+
             var db = new StoreDbContext();
+
             var pageSize = 5;
 
-            var products = db.Products
+            var productsQuery = db.Products.AsQueryable();
+
+
+            if (search!=null)
+            {
+                productsQuery = productsQuery.Where(p => p.Name.ToLower().Contains(search.ToLower()));
+            }
+
+            if (user !=null)
+            {
+                productsQuery = productsQuery.Where(p => p.Author.Email == user);
+                
+            }
+
+            var products =  productsQuery
                 .OrderByDescending(p=>p.Id)
                 .Skip((page-1)*pageSize)
                 .Take(pageSize)
                 .Select(p => new HomeProducts
             {
                  Id = p.Id,
-                 Categorie = p.Categorie,
+                 Categorie=p.Categorie,
                  Name = p.Name,
                  ImageUrl=p.ImageUrl,
                  Price=p.Price
@@ -53,7 +75,7 @@ namespace Store.Controllers
                 var product = new Product
                 {
                     Name = productModel.Name,
-                    Categorie = productModel.Categorie,
+                    Categorie =productModel.Categorie,
                     Description = productModel.Description,
                     Price = productModel.Price,
                     ImageUrl = productModel.ImageUrl,

@@ -17,7 +17,7 @@ namespace Store.Controllers
                 {
                     Id = p.Id,
                     Name = p.Name,
-                    Categorie = p.Categorie,
+                    Categorie=p.Categorie,
                     ImageUrl = p.ImageUrl,
                     
 
