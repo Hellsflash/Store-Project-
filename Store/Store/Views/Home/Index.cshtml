@@ -7,15 +7,16 @@
 
 
 
-<div class="jumbotron">
+<div class="form-group">
     <h1 class="text-center">Online Store</h1>
     <p class="lead text-center">Buy and Sell Everything!</p>
     <p class="text-center">
-        <a href="/Products/Create" class="btn btn-primary btn-lg">Sell Now</a>
-        <a href="/Products/All" class="btn btn-primary btn-lg">See All Products</a>
+        <a href="/Products/Create" class="btn btn-primary btn-lg"style="width:100%" >Sell Now</a>
+        <br />
+        <a href="/Products/All" class="btn btn-primary btn-lg"style="width:100%">See All Products</a>
         <br />
         <br />
-        <div class="text-center">
+        <div class="text-center"style="width:100%">
             @using (Html.BeginForm("All","Products",FormMethod.Get))
             {
                 <input type="text" class="form-control" name="search" style="display:inline-block" />
@@ -26,11 +27,11 @@
 
 
 </div>
-
+  <div class="jumbotron">
 <div class="row">
     @foreach (var product in Model)
     {
-        <div class="col-md-4">
+        <div class="col-md-6">
             <h2>@product.Name - @product.Categorie</h2>
             <p>
                 <a class="btn btn-default" href="/Products/Details/@product.Id">
@@ -39,4 +40,5 @@
             </p>
         </div>
     }
+</div>
 </div>

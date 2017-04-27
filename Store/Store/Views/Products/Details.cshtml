@@ -12,5 +12,14 @@
     </div>
     <div class="col-md-4">
         <h3>@Model.Description</h3>
+
+
+        @using (Html.BeginForm("Buy", "Products", FormMethod.Get))
+        {
+            @Html.HiddenFor(p=>p.Id)
+            <span>
+                <input type="submit"value="Buy" class="btn btn-success" />
+            </span>
+        }
     </div>
 </div>

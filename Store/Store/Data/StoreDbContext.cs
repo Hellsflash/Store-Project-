@@ -8,6 +8,7 @@ namespace Store.Data
         public StoreDbContext()
             : base("DefaultConnection", throwIfV1Schema: false)
         {
+            this.Configuration.ProxyCreationEnabled = false;
         }
         public virtual IDbSet<Product> Products { get; set; }
 

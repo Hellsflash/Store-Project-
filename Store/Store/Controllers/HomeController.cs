@@ -12,7 +12,7 @@ namespace Store.Controllers
             var db = new StoreDbContext();
 
             var products = db.Products.OrderByDescending(p => p.Id)
-                .Take(3)
+                .Take(6)
                 .Select(p => new HomeProducts
                 {
                     Id = p.Id,
