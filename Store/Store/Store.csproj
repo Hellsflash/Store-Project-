@@ -209,6 +209,7 @@
     <Compile Include="Models\Products\CreateProductModel.cs" />
     <Compile Include="Models\Products\HomeProducts.cs" />
     <Compile Include="Models\Products\ProductDetails.cs" />
+    <Compile Include="Models\Products\ProductsViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>
@@ -271,9 +272,11 @@
     <Content Include="Views\Products\Details.cshtml" />
     <Content Include="Views\Products\All.cshtml" />
     <Content Include="Views\Products\Buy.cshtml" />
+    <Content Include="Views\Products\Edit.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Views\ShopingCart\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />

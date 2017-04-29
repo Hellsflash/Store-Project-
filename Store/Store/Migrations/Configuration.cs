@@ -9,7 +9,7 @@ namespace Store.Migrations
         public Configuration()
         {
             AutomaticMigrationsEnabled = true;
-            AutomaticMigrationDataLossAllowed = false;
+            AutomaticMigrationDataLossAllowed = true;
             ContextKey = "Store.Data.StoreDbContext";
         }
 

@@ -5,6 +5,7 @@ namespace Store.Data
 {
     public class Product
     {
+
         public int Id { get; set; }
 
         [Required]
@@ -29,5 +30,12 @@ namespace Store.Data
         public virtual User Author { get; set; }
 
 
+        public bool IsAuthor(string name)
+        {
+            return this.Author.UserName.Equals(name);
+        }
     }
 }
+
+
+
