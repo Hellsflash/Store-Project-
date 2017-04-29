@@ -20,6 +20,9 @@ namespace Store.Models.Products
         [Required]
         [Display(Name="Picture URL")]
         [ImageValidateion]
-        public string ImageUrl { get; set; }   
+        public string ImageUrl { get; set; }  
+        
+        
+
     }
 }

@@ -2,6 +2,9 @@
 using Store.Data;
 using Store.Models;
 using Store.Models.Products;
+using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.Data.Entity;
 using System.Linq;
 using System.Net;
 using System.Web.Mvc;
@@ -10,8 +13,61 @@ namespace Store.Controllers
 {
     public class ProductsController : Controller
     {
-        
-        public ActionResult Buy(int?id)
+
+        public ActionResult Edit(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+
+            }
+            var db = new StoreDbContext();
+            Product productId = db.Products.Find(id);
+            var product = db.Products.Where(p => p.Id == id).FirstOrDefault();
+
+            if (product == null)
+            {
+                return HttpNotFound();
+            }
+            var model = new ProductDetails();
+            model.Id = product.Id;
+            model.ImageUrl = product.ImageUrl;
+            model.Name = product.Name;
+            model.Description = product.Description;
+            model.Categorie = product.Categorie;
+            model.Price = product.Price;
+            model.Author = product.Author;
+
+            return View(model);
+
+        }
+        [HttpPost]
+        public ActionResult Edit(ProductDetails model)
+        {
+            if (ModelState.IsValid)
+            {
+                var db = new StoreDbContext();
+
+                var product = db.Products.FirstOrDefault(p => p.Id == model.Id);
+
+                product.Id = model.Id;
+                product.ImageUrl = model.ImageUrl;
+                product.Name = model.Name;
+                product.Description = model.Description;
+                product.Categorie = model.Categorie;
+                product.Price = model.Price;
+                product.Author= model.Author;
+
+                db.Entry(product).State = EntityState.Modified;
+                db.SaveChanges();
+
+                return RedirectToAction("All");
+            }
+            return View(model);
+        }
+
+        [Authorize]
+        public ActionResult Buy(int? id)
         {
             var db = new StoreDbContext();
 
@@ -26,7 +82,7 @@ namespace Store.Controllers
                 return HttpNotFound();
             }
             return View(product);
-                
+
         }
 
         [HttpPost, ActionName("Buy")]
@@ -146,6 +202,15 @@ namespace Store.Controllers
 
 
             return View(product);
+
+
+        }
+        private bool IsUserAuthorized(Product product)
+        {
+            bool isAdmin = this.User.IsInRole("Admin");
+            bool isAuthor = product.IsAuthor(this.User.Identity.Name);
+
+            return isAdmin || isAuthor;
 
         }
     }
