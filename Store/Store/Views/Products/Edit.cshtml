@@ -1,0 +1,68 @@
+﻿@model Store.Models.Products.ProductDetails
+
+@{
+    ViewBag.Title = "Edit";
+}
+
+<div class="container">
+    <div class="well">
+        <h2 class="text-center">Edit Product Details</h2>
+        @using (Html.BeginForm("Edit", "Products", FormMethod.Post, new { @class = "form-horizontal" }))
+        {
+            @Html.AntiForgeryToken()
+            @Html.ValidationSummary()
+
+            @Html.HiddenFor(m => m.Id)
+
+
+            <div class="form-group">
+                @Html.LabelFor(m => m.Name, new { @class = "control-label col-sm-4" })
+                <div class="col-sm-4">
+                    @Html.TextBoxFor(m => m.Name, new { @class = "form-control" })
+                </div>
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(m => m.Categorie, new { @class = "control-label col-sm-4" })
+                <div class="col-sm-4">
+                    @Html.TextBoxFor(m => m.Categorie, new { @class = "form-control" })
+                </div>
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(m => m.ImageUrl, new { @class = "control-label col-sm-4" })
+                <div class="col-sm-4">
+                    @Html.TextBoxFor(m => m.ImageUrl, new { @class = "form-control" })
+                </div>
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(m => m.Price, new { @class = "control-label col-sm-4" })
+                <div class="col-sm-4">
+                    @Html.TextBoxFor(m => m.Price, new { @class = "form-control" })
+                </div>
+            </div>
+
+
+                <div class="form-group">
+                    @Html.LabelFor(m => m.Description, new { @class = "control-label col-sm-4" })
+                    <div class="col-sm-4">
+                        @Html.TextAreaFor(m => m.Description, new { @class = "form-control", @rows = "7" })
+                    </div>
+                </div>
+                   <div class="form-group text-center">
+                         
+                <input type="submit" value="Back" class="btn btn-default" onclick="goBack()" style="width:50% " />
+
+                <input type="submit" value="Edit" class="btn btn-success"  style="width:50% " />
+
+                <script type="text/javascript">
+                    function goBack() {
+                        window.history.back()
+                    }
+                </script>
+
+                              </div>
+
+
+
+        }
+    </div>
+</div>
